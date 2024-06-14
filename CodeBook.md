@@ -23,7 +23,7 @@ The sensor signals (accelerometer and gyroscope) were pre-processed by applying 
 5 Creating a second, independent tidy data set with the average of each variable for each activity and each subject.  
 
 ## Load Packages and get the Data
-```{r}
+```{r, echo=false, results="asis"}
 packages <- c("data.table", "reshape2", "dplyr")  
 sapply(packages, require, character.only=TRUE, quietly=TRUE)  
 path <- getwd()  
@@ -43,7 +43,7 @@ features <- read.table("UCI HAR Dataset/features.txt", col.names = c("n","functi
 activities <- read.table("UCI HAR Dataset/activity_labels.txt", col.names = c("id", "activity"))  
 subject_test <- read.table("UCI HAR Dataset/test/subject_test.txt", col.names = "subject")  
 subject_train <- read.table("UCI HAR Dataset/train/subject_train.txt", col.names = "subject")  
-x_train <- read.table("UCI HAR Dataset/train/X_train.txt", col.names = features$functions)  
+x_train <- read.table("UCI HAR Dataset/train/X_train.txt", col.names = features$functions)   
 x_test <- read.table("UCI HAR Dataset/test/X_test.txt", col.names = features$functions)  
 y_test <- read.table("UCI HAR Dataset/test/y_test.txt", col.names = "id")  
 y_train <- read.table("UCI HAR Dataset/train/y_train.txt", col.names = "id")  
@@ -85,4 +85,6 @@ tidyDataSet2 <- tidyDataSet %>%
   group_by(subject, activity) %>%
   summarise_all(funs(mean))  
 write.table(tidyDataSet2, "tidyDataSet2.txt", row.name=FALSE)
+
+tidyDataSet
 ```
